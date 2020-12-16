@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Curos Java Script</title>
+</head>
+<body>
+    <h1>Fundamentos de JavaScript</h1>
+    
+    <script>
+//||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+//||||||||||||||||||||||||||||||||||||||||||||||||||||FUNCIONES|||||||||||||||||||||||||||||||||||||||||||||||||
+//||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+    //Funcion Declarada
+    
+    function ejemplo(){
+        console.log("Uno");
+        console.log("Dos");
+        console.log("Tres");
+    }
+    ejemplo();
+
+
+    //Funcion con return
+    function funConReturn(){
+        return "Este es un texto con return";
+
+    }
+    console.log(funConReturn());
+
+
+    //  FUNCION DECLARADA VS FUNCION EXPRESADAS
+
+    //FUNCION DECLARA - Esta es una funcion como tal y puede ser llamada en cualquir lugar
+    //Funcion con parametros
+    saludar();             //------------------------------>En esta si la podemos llamar antes de la funcion
+    function saludar(nombre = "Saira", apellido = "Jaimez"){                        
+        console.log(`Hola mi nombre es: ${nombre} y mi apellido es ${apellido} `);
+    }
+                                        //Es semejante a los constructores
+    saludar("David", "Martinez");       //Aqui como se declara con String tomas estos Strong  
+    saludar();                          //En esta parte no se declaran ningun Strin asi que toma los que tiens por defecto
+
+    //FUNCION EXPRESADA - ESta esun funcion espresada y solo puede ser llamda despues de crear la funcion ya que esta es asignada a una varaible 
+    //Funcion anonimas - Se llaman asi ya que se le asigna una funcion a un variable
+
+    // direccion();             ------------------------------------>En esta nos da error
+    const direccion = function(ciudad){
+        console.log(`Mi ciudad es ${ciudad}`);
+    }
+
+    direccion("Mexico");
+
+//||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+//||||||||||||||||||||||||||||||||||||||||||||||||||||OBJETOS|||||||||||||||||||||||||||||||||||||||||||||||||||
+//||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+    //Dentro de un objeto a la variables se les llama atributos/propiedades
+    //Dentro de una funcion a las varaibles se les llala meto    
+
+    const informacion = {                           //Un forma de crear objetos
+        nombre: "David",                            //Un atributo String dentro de un objeto
+        apellido: "Martinez",                           
+        animes:["SKN", "Naruto", "FulllM",[1,2,3,4]],         //Un arreglo dentro de una objeto
+        contacto:{                                  //Partes de 
+            facebook:"David Martinez",              //un 
+            Whatsapp: parseInt("5516133222"),       //objeto dentro 
+            correo:"david_14yeah@htomail.com"       //de otro objeto
+        },
+        saludo: function(){                                                     //Funcion 
+            console.log("Saludo desde una funcion dentro de un objeto");        //dentro de un objeto
+        },
+        datosPers: function(){
+            console.log(`Mi nombre es ${this.nombre} y mi apellido es ${this.apellido} vi todas la temporadas 
+            de ${this.animes[0]} son ${this.animes[3][3]} para mas informacion contactame por 
+            ${this.contacto.correo} y por ultimo un saludito `);
+        }
+        
+
+
+    };
+
+    console.log(informacion.nombre);  
+    console.log(informacion.animes[0]);
+    console.log(informacion.animes[3][3])
+    console.log(informacion.contacto.facebook);
+    informacion.saludo();
+    informacion.datosPers();
+
+
+//||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+//||||||||||||||||||||||||||||||||||||||||||||||||||||LOOPS|||||||||||||||||||||||||||||||||||||||||||||||||||||
+//||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+   //ForEach
+    informacion.animes.forEach(element => {                         //  Especial para recorrer un arreglo
+        document.write(`El primer elemento es ${element} <br>`);
+    });
+    
+
+    //forIn
+    for (const dato in informacion) {                                     //  Especial para recorrer propiedades un objeto
+       document.write(`${dato}: ${informacion[dato]} <br>`);
+    }
+
+
+    let numero = [10,4,3,1,5,67,5];
+    //forof
+    for (const elem of numero) {                                    //Este me permite recorrer cada uno de los elementos de un objeto que se
+        console.log(elem);                                          //siempre y cuando sea iterable(Esto significa que 
+    }                                                              //este pueda partirce en varios elementos como un arreglo )
+   
+    let letrero = "Hola mundo desde JavaScript"
+    //otroejemplode forof
+    for (const texto of letrero) {
+        console.log(texto);
+    }
+
+//||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+//||||||||||||||||||||||||||||||||| TRY - CATCH - FINALLY - THROW|||||||||||||||||||||||||||||||||||||||||||||||
+//|||||||||||||||||||||||||||||||||||||||||||||||(ERRORES)||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+try {
+    console.log("En el try se agrega el codigo a evaluar(a buscar errores)");
+    varError;
+    console.log("No se ejecuta por el error");
+} catch (error) {
+    console.log("Captura cualquier error surgido en el try");
+    console.log(error);
+}finally{
+    console.log("Finally esta parte siempre se ejecutara despues del bloque try-cathc");
+}
+
+try {
+    let n1 = 3;
+    
+    if(isNaN(n1)){                              //isNAN para saber si es un numero
+        throw new Error("El caracter introducido no e sun numero");          //Es un error como personalizado
+    }
+    console.log(n1*n1);
+} catch (error) {
+    console.log(`Se produjo el sieguiente error: ${error}`);                //Aqui se imprime el error que se obtuvo
+}
+
+//||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+//|||||||||||||||||||||||||||||||||||||||||||| BREAK - CONTINUE|||||||||||||||||||||||||||||||||||||||||||||||||
+//||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+let arreglo = [0, 1,2,3,4,5,6,7,8,9,];
+
+for(let i = 0; i < arreglo.length; i++){
+    if(i === 5){
+        break;                              //Este break no solo rompe con el if sino va has con 
+    }                                       //el padre y tambien rompe el for
+    console.log(arreglo[i]);
+}
+
+console.log("<br>");
+for(let i = 0; i < arreglo.length; i++){
+    if(i === 5){
+        continue;
+    }
+    console.log(arreglo[i]);
+}
+//||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+//|||||||||||||||||||||||||||||||||||||||||||||||||||| DESTRUCTURACION||||||||||||||||||||||||||||||||||||||||||
+//||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+//Permite desempacar o asignar dinamicamente valores de arreglos o propiedades de objetos a nuevas variables
+//Desctructuracion con arreglos
+const foo = ['one', 'two', 'three'];                    //De este arreglo con 
+
+const [red, yellow, green] = foo;                   //Se copian a uno nuevo y ahora 
+console.log(red); // "one"                                  //red toma el valor de one
+console.log(yellow); // "two"                               //yellow toma el valor de two
+console.log(green); // "three"                              //green toma el valor de three
+
+//
+let arrNum = [1,2,3];
+
+const [uno, dos, tres] = arrNum;        //Destructuracion
+
+console.log(uno);
+
+//Desctructuracion con abjetos
+
+const persona  ={
+    nombre: "David",
+    apellido: "Martinez",
+    edad: 23
+};
+
+const {edad, nombre, apellido} = persona;
+
+console.log(nombre, apellido,edad)      //NO importa el orden pero si el nombre 
+
+//||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+//|||||||||||||||||||||||||||||||||||||||||||||||||||| OBJETOS LITERALES |||||||||||||||||||||||||||||||||||||||
+//||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+//Esta seria una signacion de variables normal a un objeto
+let nombre1 = "Vaquita",         //En esta parte se tendrian que definir las variables
+    edad1 = 5;                   //pero como ya las tengo definidas arriba solo les asigno un nuevo valor
+const perro = {     //declaracion de un objeto
+    nombre: nombre,
+    edad: edad,
+    ladrar: function(){
+        console.log("Guau Guau");
+    }
+}
+console.log(perro)
+perro.ladrar();
+
+//Esta seria la forma de asignar variables o funcionesa un objeto literales
+//Si la variables o funciones tienen el mismo nombre que llevaran las variables o funciones del objeto
+//se escriben de la siguienbte forma
+const dog = {
+    nombre1,            
+    edad1,
+    raza: "Vaca",
+    ladrar(){
+        console.log("Vaca ladrando")
+    }
+}
+console.log(dog);
+dog.ladrar();
+
+//||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+//||||||||||||||||||||||||||||||||||||||||||||||| PARAMETROS REST ||||||||||||||||||||||||||||||||||||||||||||||
+//||||||||||||||||||||||||||||||||||||||||||||||| OPERADOR SPREAD ||||||||||||||||||||||||||||||||||||||||||||||
+//||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+//Sirve para agregar virtualmente parametro infintos dentro de funciones o variables "...+nomVaraible"
+function suma(a, b, ...c){              //c se haria como un arreglo de las variables que no sean declaradas
+    let resultado = a + b;
+
+    c.forEach(function (n){
+        resultado += n;
+    }) ;  
+
+    return resultado;
+}
+
+console.log(suma(1, 1, 5, 6));
+
+
+//Esta instrucciones muy usada con freamworks 
+
+let arreglo1 = [1,2,3,4,],
+    arreglo2 = [9,8,7,6,];
+
+//let arreglo3 = [arreglo1, arreglo2];          //Esta seria la forma convensional
+                                                //Pero crea un tercer arreglo que tiene dentro 2 arreglos
+let arreglo3 = [...arreglo1, ...arreglo2]       //En este se crea un arreglo unico conbinando los aanteriores
+console.log(arreglo3);
+
+//||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+//||||||||||||||||||||||||||||||||||||||||||||||| ARROW FUNCTIONS ||||||||||||||||||||||||||||||||||||||||||||||
+//||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+//Funciones flecha (arrow functions) se hace sobre las funciones EXPRESADAS
+
+//Es una forma de escribir mas simple funciones
+//const saludo = funtion(){
+/* const saludo = () => {      //Funcion expresada, se quita funtions por =>
+    console.log("Hola");
+} */
+
+/* const saludo = () => console.log("Hola desde una funcion flecha")
+saludo(); */
+/* const saludo = (nombre, ram) => console.log(`Hola mi estimado: ${nombre} usted tiene la edad: ${ram}`);  //Cuando una funcion tiene parametros se puedenq uitar los parentesis
+saludo("david", 32); */
+//Tambien tienes un return implicito
+/* 
+const suMa = function(a,b){
+    return a+b;
+}
+console.log(suMa(4,5)); */
+
+//Esta en la foma mas simplificada
+/* const suMa = (a,b) => a+b;      //Como es una sola instruccion se puede escribir sin las llaves
+console.log(suMa(4,5));
+ */
+
+ //Una de las formas mas utilizadas en es el metodo forEach
+
+ let arreglo4 = [9,8,7,6,5,4,3,2,1];
+arreglo4.forEach(element => {console.log(`El dato es: ${element}`)});
+
+//||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+//|||||||||||||||||||||||||||||||||||||||||||||||||||| PROTOTIPOS ||||||||||||||||||||||||||||||||||||||||||||||
+//||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+/*
+POO - Existen 4 bases de la Programacion Orientada a Objetos
+
+Clases - Modelo a seguir (tambien conocido como plantilla) ----Ejemplo un silla, uno puede imaginar miles de sillas 
+Objetos - Es una instancia de ua clase (Seria como su representacion fisica )
+    Atributos - Caracteristicas o propiedades del objeto
+    Metodos - Las acciones que un objeto puede realizar
+
+*/
+//Prototipos
+function Animal(nombre, genero){      //Funcion constructora
+    //Atributios
+    this.genero = genero;
+    this.nombre = nombre;
+
+    //Metodos
+    this.voz = function(){
+        console.log("Hola soy un perrituu");
+    }
+    
+}
+
+const hachiko = new Animal("Hachiko", "Machote"),
+      betoven = new Animal("Betoven", "Macho");
+
+console.log(hachiko);
+console.log(betoven);
+
+
+
+    </script>
+</body> 
+</html>
